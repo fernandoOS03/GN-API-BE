@@ -15,7 +15,6 @@ let database;
         }
         return database;
 
-
     }catch(error){
         console.error("Error al conectar a MongoDB : " ,error);
         throw error;
