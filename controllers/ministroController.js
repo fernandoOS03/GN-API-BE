@@ -37,7 +37,7 @@ export const deleteMinistro = async (req, res) => {
     const { id } = req.params;
 
     if (!id || id.lenght !== 24) {
-        return res.status(400).json({ success: false, message: "ID no válido; " });
+        return res.status(400).json({ success: false, message: "ID no válido" });
     }
 
     try {
