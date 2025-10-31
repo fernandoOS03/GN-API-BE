@@ -18,7 +18,7 @@ export const createMinistro = async (datosMinistro) => {
         const resultado = await database.collection('ministros').insertOne(datosMinistro);
         return resultado.insertId;
     } catch (error) {
-        console.error("Error al crear un ministro", error);
+        console.error("Error al crear ministro", error);
         throw error;
     }
 };
@@ -57,7 +57,7 @@ export const getMinistroById = async (id) => {
         const database = await connectDB();
         const ministro = await database.collection('ministros').findOne(
             {
-                _id: new ObjectId(id)
+            _id: new ObjectId(id)
             });
         return ministro;
     } catch (error) {
