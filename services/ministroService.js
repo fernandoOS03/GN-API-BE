@@ -7,7 +7,7 @@ export const getMinistros = async () => {
         const ministros = await database.collection('ministros').find().toArray();
         return ministros;
     } catch (error) {
-        console.error("Error al conectar a MongoDB:", error);
+        console.error(" [Servicio] Error al obtener los ministros de la DB: ", error);
         throw error;
     }
 };
@@ -18,7 +18,7 @@ export const createMinistro = async (datosMinistro) => {
         const resultado = await database.collection('ministros').insertOne(datosMinistro);
         return resultado.insertedId;
     } catch (error) {
-        console.error("Error al crear un ministro", error);
+        console.error(" [Servicio] Error al crear ministro en la DB: ", error);
         throw error;
     }
 };
@@ -27,12 +27,12 @@ export const updateMinistro = async (id, datosMinistro) => {
     try {
         const database = await connectDB();
         const resultado = await database.collection('ministros').updateOne(
-            { _id: new ObjectId(id) }, //convierte el ID a un ObjectId
-            { $set: datosMinistro }  //Sirve par actualizar 
+            { _id: new ObjectId(id) }, 
+            { $set: datosMinistro }  
         );
-        return resultado.modifiedCount; //retorna el numero de documentos modificados
+        return resultado.modifiedCount; 
     } catch (error) {
-        console.error("Error al actualizar el ministro", error);
+        console.error(" [Servicio] Error al editar ministro en la DB: ", error);
         throw error;
     }
 };
@@ -41,12 +41,12 @@ export const deleteMinistro = async (id) => {
     try {
         const database = await connectDB();
         const resultado = await database.collection('ministros').deleteOne(
-            {_id: new ObjectId(id)}
+            { _id: new ObjectId(id) }
         );
         return resultado.deletedCount;
 
     } catch (error) {
-        console.error("Error al eliminar el ministro", error);
+        console.error(" [Servicio] Error al eliminar ministro en la DB: ", error);
         throw error;
     }
 };
@@ -60,7 +60,7 @@ export const getMinistroById = async (id) => {
             });
         return ministro;
     } catch (error) {
-        console.error("Error al obtener el ministro", error);
+        console.error(" [Servicio] Error al obtener ministro de la DB: ", error);
         throw error;
     }
 };
