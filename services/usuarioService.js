@@ -1,3 +1,4 @@
+
 import { connectDB } from "../config/connect.js";
 import { ObjectId } from "mongodb";
 
@@ -11,7 +12,6 @@ export const getUsuarios = async () => {
         console.error(" [Servicio] Error al obtener los usuarios de la DB: ", error);
         throw error;
     }
-    //HOL YO ESTOY AQUI
 };
 
 export const getUsuarioById = async (id) => {

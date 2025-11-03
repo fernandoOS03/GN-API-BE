@@ -56,7 +56,7 @@ export const getMinistroById = async (id) => {
         const database = await connectDB();
         const ministro = await database.collection('ministros').findOne(
             {
-                _id: new ObjectId(id)
+            _id: new ObjectId(id)
             });
         return ministro;
     } catch (error) {
