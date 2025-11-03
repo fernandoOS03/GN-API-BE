@@ -55,9 +55,7 @@ export const getSedeInternacionalById = async (id) => {
     try {
         const database = await connectDB();
         const sedeInternacional = await database.collection('sedesInternacionales').findOne(
-            {
-                _id: new ObjectId(id)
-            });
+            { _id: new ObjectId(id)});
         return sedeInternacional;
     } catch (error) {
         console.error(" [Servicio] Error al obtener sede Internacional de la DB: ", error);
