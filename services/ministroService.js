@@ -5,10 +5,10 @@ export const getMinistros = async () => {
     try {
         const database = await connectDB();
         const ministros = await database.collection('ministros').find().toArray();
-        console.table(ministros);
-        // console.log("Ministros fetched successfully");
+        return ministros;
     } catch (error) {
         console.error("Error al conectar a MongoDB:", error);
+        throw error;
     }
 };
 
@@ -16,7 +16,7 @@ export const createMinistro = async (datosMinistro) => {
     try {
         const database = await connectDB();
         const resultado = await database.collection('ministros').insertOne(datosMinistro);
-        return resultado.insertId;
+        return resultado.insertedId;
     } catch (error) {
         console.error("Error al crear un ministro", error);
         throw error;
@@ -50,7 +50,6 @@ export const deleteMinistro = async (id) => {
         throw error;
     }
 };
-
 
 export const getMinistroById = async (id) => {
     try {
