@@ -55,9 +55,7 @@ export const getSedeNacionalById = async (id) => {
     try {
         const database = await connectDB();
         const sedeNacional = await database.collection('sedesNacionales').findOne(
-            {
-                _id: new ObjectId(id)
-            });
+            { _id: new ObjectId(id) });
         return sedeNacional;
     } catch (error) {
         console.error(" [Servicio] Error al obtener sedeNacional de la DB: ", error);
