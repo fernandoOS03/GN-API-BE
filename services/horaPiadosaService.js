@@ -55,9 +55,7 @@ export const getHoraPiadosaById = async (id) => {
     try {
         const database = await connectDB();
         const ministro = await database.collection('horasPiadosas').findOne(
-            {
-                _id: new ObjectId(id)
-            });
+            {_id: new ObjectId(id)});
         return ministro;
     } catch (error) {
         console.error(" [Servicio] Error al obtener la hora Piadosa de la DB: ", error);
