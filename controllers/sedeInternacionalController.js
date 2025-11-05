@@ -1,6 +1,6 @@
 import * as sedeInternacionalService from "../services/sedeInternacionalService.js";
 
-export const getSedesInternacionales = async (req, res) => {
+export const getAllSedesInternacionales = async (req, res) => {
   try {
     const data = await sedeInternacionalService.getSedeInternacional();
     res.status(200).json({ success: true, data });

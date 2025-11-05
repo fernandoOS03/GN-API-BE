@@ -10,7 +10,7 @@ let database;
 
         if (!cliente){
             cliente = await MongoClient.connect(mongoUrl);   
-            database = cliente.db(); //Almacenamos la instancia de la base de datos
+            database = cliente.db(); 
             console.log("Conexion a MongoDB establecida con exito");
         }
         return database;
