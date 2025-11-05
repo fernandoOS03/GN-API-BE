@@ -1,5 +1,6 @@
 import { connectDB } from "../config/connect.js";
 import { ObjectId } from "mongodb";
+import m_sedeNacional from "../models/m_sedeNacional.js";
 
 export const getSedeNacional = async () => {
     try {
@@ -59,6 +60,17 @@ export const getSedeNacionalById = async (id) => {
         return sedeNacional;
     } catch (error) {
         console.error(" [Servicio] Error al obtener sedeNacional de la DB: ", error);
+        throw error;
+    }
+};
+
+export const getSedeConMinistro = async (idSede) =>{
+    try{
+        const sedeConMinistro = await m_sedeNacional.findById(idSede).populate('id_ministro');
+        return sedeConMinistro;
+
+    }catch(error){
+        console.error("[Servicio] Error al obtener sede con ministro de la DB: ", error);
         throw error;
     }
 };
