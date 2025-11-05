@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { validateObjectId } from "../../middlewares/validateId.js";
-import { createEvento, updateEvento, deleteEvento, getAllEventos, getEventoById } from "../../controllers/eventoController.js";
+import { createEvento, updateEvento, deleteEvento, getAllEventos, getEventoById } from "../../controllers/c_evento.js";
 
  const router = Router();
 

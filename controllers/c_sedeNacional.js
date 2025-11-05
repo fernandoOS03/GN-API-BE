@@ -1,4 +1,4 @@
-import * as sedeNacionalService from "../services/sedeNacionalService.js";
+import * as sedeNacionalService from "../services/s_sedeNacional.js";
 
 export const getAllSedesNacionales = async (req, res) => {
   try {

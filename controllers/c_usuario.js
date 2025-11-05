@@ -1,4 +1,4 @@
-import * as usuarioService from "../services/usuarioService.js";
+import * as usuarioService from "../services/s_usuario.js";
 
 export const getAllUsuarios = async (req, res) => {
   try {

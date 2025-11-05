@@ -1,6 +1,6 @@
 import {Router} from "express";
 import { validateObjectId } from "../../middlewares/validateId.js";
-import {createUsuario, deleteUsuario, updateUsuario, getAllUsuarios, getUsuarioById} from "../../controllers/usuarioController.js";
+import {createUsuario, deleteUsuario, updateUsuario, getAllUsuarios, getUsuarioById} from "../../controllers/c_usuario.js";
 
 const router = Router();
 

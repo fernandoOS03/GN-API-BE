@@ -1,6 +1,6 @@
 import {Router} from "express";
 import { validateObjectId } from "../../middlewares/validateId.js";
-import {createTestimonio, deleteTestimonio, updateTestimonio, getAllTestimonios, getTestimonioById} from "../../controllers/testimonioController.js";
+import {createTestimonio, deleteTestimonio, updateTestimonio, getAllTestimonios, getTestimonioById} from "../../controllers/c_testimonio.js";
 
 const router = Router();
 

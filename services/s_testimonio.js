@@ -1,7 +1,7 @@
 import { connectDB } from "../config/connect.js";
 import { ObjectId } from "mongodb";
 
-export const gettestimonios = async () => {
+export const getAllTestimonios = async () => {
     try {
         const database = await connectDB();
         const testimonios = await database.collection('testimonios').find().toArray();

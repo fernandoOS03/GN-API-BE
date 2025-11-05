@@ -1,6 +1,6 @@
 import {Router} from "express";
 import { validateObjectId } from "../../middlewares/validateId.js";
-import {createSedeNacional, deleteSedeNacional, updateSedeNacional, getAllSedesNacionales, getSedeNacionalById} from "../../controllers/sedeNacionalController.js";
+import {createSedeNacional, deleteSedeNacional, updateSedeNacional, getAllSedesNacionales, getSedeNacionalById} from "../../controllers/c_sedeNacional.js";
 
 const router = Router();
 

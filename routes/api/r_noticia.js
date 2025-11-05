@@ -1,6 +1,6 @@
 import {Router} from "express";
 import { validateObjectId } from "../../middlewares/validateId.js";
-import {createNoticia, deleteNoticia, updateNoticia, getAllNoticias, getNoticiaById} from "../../controllers/noticiaController.js";
+import {createNoticia, deleteNoticia, updateNoticia, getAllNoticias, getNoticiaById} from "../../controllers/c_noticia.js";
 
 const router = Router();
 

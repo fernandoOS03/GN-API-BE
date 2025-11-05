@@ -1,6 +1,6 @@
 import {Router} from "express";
 import { validateObjectId } from "../../middlewares/validateId.js";
-import {getAllHorasPiadosas, getHoraPiadosaById, updateHoraPiadosa, createHoraPiadosa, deleteHoraPiadosa} from "../../controllers/horaPiadosaController.js"; 
+import {getAllHorasPiadosas, getHoraPiadosaById, updateHoraPiadosa, createHoraPiadosa, deleteHoraPiadosa} from "../../controllers/c_horaPiadosa.js"; 
 
 const router = Router();
 
