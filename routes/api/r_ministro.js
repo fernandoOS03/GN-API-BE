@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { validateObjectId } from "../../middlewares/validateId.js";
-import { createMinistro, deleteMinistro, updateMinistro, getAllMinistros, getMinistroById } from "../../controllers/ministroController.js";
+import { createMinistro, deleteMinistro, updateMinistro, getAllMinistros, getMinistroById } from "../../controllers/c_ministro.js";
 
 const router = Router();
 

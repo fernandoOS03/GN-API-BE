@@ -1,4 +1,4 @@
-import * as horaPiadosaService from "../services/horaPiadosaService.js";
+import * as horaPiadosaService from "../services/s_horaPiadosa.js";
 
 export const getAllHorasPiadosas = async (req, res) => {
   try {

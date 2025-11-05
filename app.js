@@ -1,14 +1,14 @@
 import 'dotenv/config';
 import express from 'express';
 import { connectDB, closeConnection } from './config/connect.js';
-import ministroRoutes from './routes/api/ministroRoutes.js';
-import eventoRoutes from './routes/api/eventoRoutes.js';
-import horaPiadosaRoutes from "./routes/api/horaPiadosaRoutes.js";
-import noticiaRoutes from "./routes/api/noticiaRoutes.js";
-import sedeInternacionalRoutes from "./routes/api/sedeInternacionalRoutes.js";
-import sedeNacionalRoutes from "./routes/api/sedeNacionalRoutes.js";
-import testimonioRoutes from "./routes/api/testimonioRoutes.js";
-import usuarioRoutes from "./routes/api/usuarioRoutes.js";
+import ministroRoutes from './routes/api/r_ministro.js';
+import eventoRoutes from './routes/api/r_evento.js';
+import horaPiadosaRoutes from "./routes/api/r_horaPiadosa.js";
+import noticiaRoutes from "./routes/api/r_noticia.js";
+import sedeInternacionalRoutes from "./routes/api/r_sedeInternacional.js";
+import sedeNacionalRoutes from "./routes/api/r_sedeNacional.js";
+import testimonioRoutes from "./routes/api/r_testimonio.js";
+import usuarioRoutes from "./routes/api/r_usuario.js";
 
 
 const app = express();
@@ -24,8 +24,6 @@ app.use('/api/sedeNacional', sedeNacionalRoutes);
 app.use('/api/testimonio', testimonioRoutes);
 app.use('/api/usuario', usuarioRoutes);
 app.use('/api/evento', eventoRoutes);
-
-
 
 
 

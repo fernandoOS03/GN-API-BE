@@ -1,4 +1,4 @@
-import * as ministroService from "../services/ministroService.js";
+import * as ministroService from "../services/s_ministro.js";
 
 export const getAllMinistros = async (req, res) => {
  

@@ -1,4 +1,4 @@
-import * as noticiaService from "../services/noticiaService.js";
+import * as noticiaService from "../services/s_noticia.js";
 
 export const getAllNoticias = async (req, res) => {
   try {

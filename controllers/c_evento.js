@@ -1,4 +1,4 @@
-import * as eventoService from "../services/eventoService.js";
+import * as eventoService from "../services/s_evento.js";
 
 export const getAllEventos = async (req, res) => {
     try {

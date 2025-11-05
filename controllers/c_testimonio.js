@@ -1,4 +1,4 @@
-export * as testimonioService from "../services/testimonioService.js";
+import * as testimonioService from "../services/s_testimonio.js";
 
 export const getAllTestimonios = async (req, res) => {
     try {
