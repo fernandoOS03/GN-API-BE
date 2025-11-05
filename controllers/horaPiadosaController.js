@@ -1,6 +1,6 @@
 import * as horaPiadosaService from "../services/horaPiadosaService.js";
 
-export const getHorasPiadosas = async (req, res) => {
+export const getAllHorasPiadosas = async (req, res) => {
   try {
     const data = await horaPiadosaService.getHorasPiadosas();
     res.status(200).json({ success: true, data });
