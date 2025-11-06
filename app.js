@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import { connectDB } from './config/connect.js';
 
+
 " ============ RUTAS ============"
 import ministroRoutes from './routes/api/r_ministro.js';
 import eventoRoutes from './routes/api/r_evento.js';
@@ -11,6 +12,11 @@ import sedeInternacionalRoutes from "./routes/api/r_sedeInternacional.js";
 import sedeNacionalRoutes from "./routes/api/r_sedeNacional.js";
 import testimonioRoutes from "./routes/api/r_testimonio.js";
 import usuarioRoutes from "./routes/api/r_usuario.js";
+
+" ============ MODELOS ============"
+import './models/m_sedeNacional.js'
+import './models/m_ministro.js'
+
 
 
 const app = express();
