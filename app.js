@@ -1,6 +1,8 @@
 import 'dotenv/config';
 import express from 'express';
-import { connectDB, closeConnection } from './config/connect.js';
+import { connectDB } from './config/connect.js';
+
+" ============ RUTAS ============"
 import ministroRoutes from './routes/api/r_ministro.js';
 import eventoRoutes from './routes/api/r_evento.js';
 import horaPiadosaRoutes from "./routes/api/r_horaPiadosa.js";

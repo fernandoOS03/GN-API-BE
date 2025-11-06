@@ -1,35 +1,19 @@
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 
-let cliente;
-let database;
 
-"Funcion que nos permitira usar le patron de conexino unica {Singleton} para conectarnos MongoDB"
- const connectDB = async () =>{
-    try{
+const connectDB = async () => {
+    try {
         const mongoUrl = process.env.URL_MONGO;
 
-        if (!cliente){
-            cliente = await MongoClient.connect(mongoUrl);   
-            database = cliente.db(); 
-            console.log("Conexion a MongoDB establecida con exito");
-        }
-        return database;
+        const connection = await mongoose.connect(mongoUrl, {});
 
-    }catch(error){
-        console.error("Error al conectar a MongoDB : " ,error);
-        throw error;
+        console.log(`Mongosee conectado : ${connection.connect.host}`);
+
+    } catch (error) {
+        console.error("Error al conectar a MongoDB : ", error.message);
+        process.exit(1);
     }
 };
 
 
-"Funcion para cerrar la conexion cuando el servidror se apague"
- const closeConnection = async () =>{
-    if (cliente){
-        await cliente.close();
-        cliente = null;
-        database = null;
-        console.log("Conexion a MongoDB cerrada");
-    }
-};
-
-export { connectDB, closeConnection };
+export { connectDB };

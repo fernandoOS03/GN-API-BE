@@ -1,6 +1,7 @@
 import { connectDB } from "../config/connect.js";
 import { ObjectId } from "mongodb";
 
+
 export const geteventos = async () => {
     try {
         const database = await connectDB();
@@ -12,6 +13,8 @@ export const geteventos = async () => {
     }
 };
 
+"Mongoose maneja la conversión de 'id' (string) a ObjectId por mi, a diferencia de Mnogodb Driver, es por eso que ya no se necesita"
+"Es por eso que ya no se necesita convertir desde el código"
 export const getEventoById = async (id) => {
     try {
         const database = await connectDB();

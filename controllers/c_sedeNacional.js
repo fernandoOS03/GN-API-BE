@@ -28,7 +28,7 @@ export const getSedeNacionalById = async (req, res) => {
 export const createSedeNacional = async (req, res) => {
   try {
     const data = await sedeNacionalService.createSedeNacional(req.body);
-    res.status(201).json({ success: true, message: "Sede Nacional creado Exitosamente.", id:data});
+    res.status(201).json({ success: true, message: "Sede Nacional creado Exitosamente.", id: data });
   } catch (error) {
     console.error("Error al crear la sede Nacional : ", error);
     res.status(500).json({ success: false, message: "Error..." });
@@ -61,6 +61,20 @@ export const deleteSedeNacional = async (req, res) => {
     res.status(200).json({ success: true, message: "Sede Nacional eliminada correctamente." });
   } catch (error) {
     console.error("Error al eliminar la sede nacional : ", error);
+    res.status(500).json({ success: false, message: "Error..." });
+  }
+};
+
+export const getSedeConMinistro = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await sedeNacionalService.getSedeConMinistro(id);
+    if (!data) {
+      return res.status(404).json({ success: false, message: "Sede o recurso asociado no encontrado." });
+    }
+    return res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error("Error al obtener la sede nacional con ministro : ", error.message);
     res.status(500).json({ success: false, message: "Error..." });
   }
 };
