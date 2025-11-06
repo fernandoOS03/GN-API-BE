@@ -1,10 +1,8 @@
-import { connectDB } from "../config/connect.js";
-import { ObjectId } from "mongodb";
+import m_noticia from "../models/m_noticia.js";
 
 export const getNoticias = async () => {
     try {
-        const database = await connectDB();
-        const noticias = await database.collection('noticias').find().toArray();
+        const noticias = await m_noticia.find();
         return noticias;
     } catch (error) {
         console.error('[Servicio] Error al obtener las noticias de la DB:', error);
@@ -14,11 +12,7 @@ export const getNoticias = async () => {
 
 export const getNoticiaById = async (id) => {
     try {
-        const database = await connectDB();
-        const noticia = await database.collection('noticias').findOne(
-            {
-                _id: new ObjectId(id)
-            });
+        const noticia = await m_noticia.findById(id);
         return noticia;
     } catch (error) {
         console.error("[Servicio] Error al obtener la noticia de la DB: ", error);
@@ -27,12 +21,11 @@ export const getNoticiaById = async (id) => {
 };
 
 export const createNoticia = async (datosNoticia) => {
-    try{
-        const database = await connectDB();
-        const resultado = await database.collection('noticias').insertOne(datosNoticia);
-        return resultado.insertedId;
+    try {
+        const resultado = await m_noticia.create(datosNoticia);
+        return resultado._id;
 
-    }catch (error){
+    } catch (error) {
         console.error("[Servicio] Error al crear la noticia en la DB: ", error);
         throw error;
 
@@ -41,13 +34,11 @@ export const createNoticia = async (datosNoticia) => {
 
 export const updateNoticia = async (id, datosNoticia) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('noticias').updateOne(
-            { _id: new ObjectId(id) },
-            { $set: datosNoticia }
-        );
-        return resultado.modifiedCount;
-
+        const resultado = await m_noticia.findByIdAndUpdate(id, datosNoticia, { new: true });
+        if (!resultado) {
+            return 0
+        }
+        return 1;
     } catch (error) {
         console.error("[Servicio] Error al editar la noticia en la DB: ", error);
         throw error;
@@ -56,10 +47,7 @@ export const updateNoticia = async (id, datosNoticia) => {
 
 export const deleteNoticia = async (id) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('noticias').deleteOne(
-            { _id: new ObjectId(id) }
-        );
+        const resultado = await m_noticia.deleteOne({ _id: id });
         return resultado.deletedCount;
 
     } catch (error) {

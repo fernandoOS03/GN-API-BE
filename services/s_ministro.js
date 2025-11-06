@@ -1,10 +1,9 @@
-import { connectDB } from "../config/connect.js";
-import { ObjectId } from "mongodb";
+
+import m_ministro from '../models/m_ministro.js'
 
 export const getMinistros = async () => {
     try {
-        const database = await connectDB();
-        const ministros = await database.collection('ministros').find().toArray();
+        const ministros = await m_ministro.find();
         return ministros;
     } catch (error) {
         console.error(" [Servicio] Error al obtener los ministros de la DB: ", error);
@@ -14,9 +13,8 @@ export const getMinistros = async () => {
 
 export const createMinistro = async (datosMinistro) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('ministros').insertOne(datosMinistro);
-        return resultado.insertedId;
+        const resultado = await m_ministro.create(datosMinistro);
+        return resultado._id;
     } catch (error) {
         console.error(" [Servicio] Error al crear ministro en la DB: ", error);
         throw error;
@@ -25,12 +23,11 @@ export const createMinistro = async (datosMinistro) => {
 
 export const updateMinistro = async (id, datosMinistro) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('ministros').updateOne(
-            { _id: new ObjectId(id) }, 
-            { $set: datosMinistro }  
-        );
-        return resultado.modifiedCount; 
+        const resultado = await m_ministro.findByIdAndUpdate(id, datosMinistro, { new: true });
+        if (!resultado) {
+            return 0
+        }
+        return 1;
     } catch (error) {
         console.error(" [Servicio] Error al editar ministro en la DB: ", error);
         throw error;
@@ -39,10 +36,7 @@ export const updateMinistro = async (id, datosMinistro) => {
 
 export const deleteMinistro = async (id) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('ministros').deleteOne(
-            { _id: new ObjectId(id) }
-        );
+        const resultado = await m_ministro.deleteOne( { _id: id });
         return resultado.deletedCount;
 
     } catch (error) {
@@ -53,11 +47,7 @@ export const deleteMinistro = async (id) => {
 
 export const getMinistroById = async (id) => {
     try {
-        const database = await connectDB();
-        const ministro = await database.collection('ministros').findOne(
-            {
-            _id: new ObjectId(id)
-            });
+        const ministro = await m_ministro.findById(id);
         return ministro;
     } catch (error) {
         console.error(" [Servicio] Error al obtener ministro de la DB: ", error);
