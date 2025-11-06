@@ -64,3 +64,18 @@ export const deleteHoraPiadosa = async (req, res) => {
     res.status(500).json({ success: false, message: "Error..." });
   }
 };
+
+export const getHraPiadConMinistro = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await horaPiadosaService.getHoraPiadosaConMinistro(id);
+    if (!data) {
+      return res.status(404).json({ success: false, message: "Hora Piadosa o recurso asociado no encontrado." });
+    }
+    return res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error("Error al obtener la hora Piadosa con ministro : ", error.message);
+    res.status(500).json({ success: false, message: "Error..." });
+  }
+};
+
