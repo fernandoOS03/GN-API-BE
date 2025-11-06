@@ -1,11 +1,8 @@
-import { connectDB } from "../config/connect.js";
-import { ObjectId } from "mongodb";
-
+import m_evento from "../models/m_evento.js";
 
 export const geteventos = async () => {
     try {
-        const database = await connectDB();
-        const eventos = await database.collection('eventos').find().toArray();
+        const eventos = await m_evento.find();
         return eventos;
     } catch (error) {
         console.error('[Servicio] Error al obtener los eventos de la DB:', error);
@@ -15,13 +12,10 @@ export const geteventos = async () => {
 
 "Mongoose maneja la conversión de 'id' (string) a ObjectId por mi, a diferencia de Mnogodb Driver, es por eso que ya no se necesita"
 "Es por eso que ya no se necesita convertir desde el código"
+
 export const getEventoById = async (id) => {
     try {
-        const database = await connectDB();
-        const evento = await database.collection('eventos').findOne(
-            {
-                _id: new ObjectId(id)
-            });
+        const evento = await m_evento.findById(id);
         return evento;
     } catch (error) {
         console.error("[Servicio] Error al obtener la evento de la DB: ", error);
@@ -29,11 +23,10 @@ export const getEventoById = async (id) => {
     }
 };
 
-export const createEvento = async (datosevento) => {
+export const createEvento = async (datosEvento) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('eventos').insertOne(datosevento);
-        return resultado.insertedId;
+        const resultado = await m_evento.create(datosEvento);
+        return resultado._id;
 
     } catch (error) {
         console.error("[Servicio] Error el crear la evento en la DB: ", error);
@@ -44,12 +37,11 @@ export const createEvento = async (datosevento) => {
 
 export const updateEvento = async (id, datosEvento) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('eventos').updateOne(
-            { _id: new ObjectId(id) },
-            { $set: datosEvento }
-        );
-        return resultado.modifiedCount;
+        const resultado = await m_evento.findByIdAndUpdate(id, datosEvento, { new: true });
+        if (!resultado) {
+            return 0
+        }
+        return 1;
 
     } catch (error) {
         console.error("[Servicio] Error al editar el evento en la DB: ", error);
@@ -59,10 +51,7 @@ export const updateEvento = async (id, datosEvento) => {
 
 export const deleteEvento = async (id) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('eventos').deleteOne(
-            { _id: new ObjectId(id) }
-        );
+        const resultado = await m_evento.deleteOne({ _id: id });
         return resultado.deletedCount;
 
     } catch (error) {

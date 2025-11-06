@@ -13,7 +13,7 @@ export const getSedeNacional = async () => {
 export const createSedeNacional = async (datosSedeNacional) => {
     try {
         const resultado = await m_sedeNacional.create(datosSedeNacional);
-        return resultado.insertedId;
+        return resultado._id;
     } catch (error) {
         console.error(" [Servicio] Error al crear sede Nacional en la DB: ", error);
         throw error;
@@ -39,7 +39,7 @@ export const updateSedeNacional = async (id, datosSedeNacional) => {
 
 export const deleteSedeNacional = async (id) => {
     try {
-        const resultado = await m_sedeNacional.findByIdAndDelete({ _id: id });
+        const resultado = await m_sedeNacional.deleteOne({ _id: id });
         return resultado.deletedCount;
 
     } catch (error) {

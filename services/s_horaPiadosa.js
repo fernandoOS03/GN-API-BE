@@ -1,10 +1,8 @@
-import { connectDB } from "../config/connect.js";
-import { ObjectId } from "mongodb";
+import m_horaPiadosa from "../models/m_horaPiadosa.js";
 
 export const getHorasPiadosas = async () => {
     try {
-        const database = await connectDB();
-        const horaPiadosa = await database.collection('horasPiadosas').find().toArray();
+        const horaPiadosa = await m_horaPiadosa.find();
         return horaPiadosa;
     } catch (error) {
         console.error(" [Servicio] Error al obtener las horas Piadosas de la DB: ", error);
@@ -14,9 +12,8 @@ export const getHorasPiadosas = async () => {
 
 export const createHoraPiadosa = async (datosHoraPiadosa) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('horasPiadosas').insertOne(datosHoraPiadosa);
-        return resultado.insertedId;
+        const resultado = await m_horaPiadosa.create(datosHoraPiadosa);
+        return resultado._id;
     } catch (error) {
         console.error(" [Servicio] Error al crear la hora Piadosa en la DB: ", error);
         throw error;
@@ -25,12 +22,11 @@ export const createHoraPiadosa = async (datosHoraPiadosa) => {
 
 export const updateHoraPiadosa = async (id, datosHoraPiadosa) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('horasPiadosas').updateOne(
-            { _id: new ObjectId(id) },
-            { $set: datosHoraPiadosa }
-        );
-        return resultado.modifiedCount;
+        const resultado = await m_horaPiadosa.findByIdAndUpdate(id, datosHoraPiadosa, { new: true });
+        if (!resultado) {
+            return 0
+        }
+        return 1;
     } catch (error) {
         console.error(" [Servicio] Error al editar la hora Piadosa en la DB: ", error);
         throw error;
@@ -39,10 +35,7 @@ export const updateHoraPiadosa = async (id, datosHoraPiadosa) => {
 
 export const deleteHoraPiadosa = async (id) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('horasPiadosas').deleteOne(
-            { _id: new ObjectId(id) }
-        );
+        const resultado = await m_horaPiadosa.deleteOne({ _id: id });
         return resultado.deletedCount;
 
     } catch (error) {
@@ -53,12 +46,21 @@ export const deleteHoraPiadosa = async (id) => {
 
 export const getHoraPiadosaById = async (id) => {
     try {
-        const database = await connectDB();
-        const ministro = await database.collection('horasPiadosas').findOne(
-            {_id: new ObjectId(id)});
+        const ministro = await m_horaPiadosa.findById(id);
         return ministro;
     } catch (error) {
         console.error(" [Servicio] Error al obtener la hora Piadosa de la DB: ", error);
         throw error;
     }
+};
+
+export const getHoraPiadosaConMinistro = async(idHoraPiadosa) =>{
+       try {
+           const hraPConMinistro = await m_horaPiadosa.findById(idHoraPiadosa).populate('id_ministro');
+           return hraPConMinistro;
+   
+       } catch (error) {
+           console.error("[Servicio] Error al obtener la hora Piadosa con ministro de la DB: ", error);
+           throw error;
+       } 
 };
