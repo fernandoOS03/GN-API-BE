@@ -1,11 +1,8 @@
-import { connectDB } from "../config/connect.js";
-import { ObjectId } from "mongodb";
 import m_sedeNacional from "../models/m_sedeNacional.js";
 
 export const getSedeNacional = async () => {
     try {
-        const database = await connectDB();
-        const sedeNacional = await database.collection('sedesNacionales').find().toArray();
+        const sedeNacional = await m_sedeNacional.find();
         return sedeNacional;
     } catch (error) {
         console.error(" [Servicio] Error al obtener las sedes Nacionales de la DB: ", error);
@@ -15,8 +12,7 @@ export const getSedeNacional = async () => {
 
 export const createSedeNacional = async (datosSedeNacional) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('sedesNacionales').insertOne(datosSedeNacional);
+        const resultado = await m_sedeNacional.create(datosSedeNacional);
         return resultado.insertedId;
     } catch (error) {
         console.error(" [Servicio] Error al crear sede Nacional en la DB: ", error);
@@ -26,12 +22,15 @@ export const createSedeNacional = async (datosSedeNacional) => {
 
 export const updateSedeNacional = async (id, datosSedeNacional) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('sedesNacionales').updateOne(
-            { _id: new ObjectId(id) }, 
-            { $set: datosSedeNacional }  
+        const resultado = await m_sedeNacional.findByIdAndUpdate(
+            id,  //Como se dio en el comentario de s_evento, este es el id a convertirse
+            datosSedeNacional,  //datos a actualizar, 
+            { new: true } //Esto asegura que devuelva el documento actualizado
         );
-        return resultado.modifiedCount; 
+        if (!resultado) {
+            return 0
+        }
+        return 1;
     } catch (error) {
         console.error(" [Servicio] Error al editar sedeNacional en la DB: ", error);
         throw error;
@@ -40,10 +39,7 @@ export const updateSedeNacional = async (id, datosSedeNacional) => {
 
 export const deleteSedeNacional = async (id) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('sedesNacionales').deleteOne(
-            { _id: new ObjectId(id) }
-        );
+        const resultado = await m_sedeNacional.findByIdAndDelete({ _id: id });
         return resultado.deletedCount;
 
     } catch (error) {
@@ -54,9 +50,7 @@ export const deleteSedeNacional = async (id) => {
 
 export const getSedeNacionalById = async (id) => {
     try {
-        const database = await connectDB();
-        const sedeNacional = await database.collection('sedesNacionales').findOne(
-            { _id: new ObjectId(id) });
+        const sedeNacional = await m_sedeNacional.findById(id);
         return sedeNacional;
     } catch (error) {
         console.error(" [Servicio] Error al obtener sedeNacional de la DB: ", error);
@@ -64,12 +58,12 @@ export const getSedeNacionalById = async (id) => {
     }
 };
 
-export const getSedeConMinistro = async (idSede) =>{
-    try{
+export const getSedeConMinistro = async (idSede) => {
+    try {
         const sedeConMinistro = await m_sedeNacional.findById(idSede).populate('id_ministro');
         return sedeConMinistro;
 
-    }catch(error){
+    } catch (error) {
         console.error("[Servicio] Error al obtener sede con ministro de la DB: ", error);
         throw error;
     }

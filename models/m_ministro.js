@@ -8,4 +8,4 @@ const MinistroSchema = new mongoose.Schema({
     telefono_contacto:String
 });
 
-export default mongoose.model('Ministro', MinistroSchema)
+export default mongoose.model('ministros', MinistroSchema)
