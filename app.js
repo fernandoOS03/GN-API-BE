@@ -14,8 +14,14 @@ import testimonioRoutes from "./routes/api/r_testimonio.js";
 import usuarioRoutes from "./routes/api/r_usuario.js";
 
 " ============ MODELOS ============"
-import './models/m_sedeNacional.js'
+import './models/m_evento.js'
+import './models/m_horaPiadosa.js'
 import './models/m_ministro.js'
+import './models/m_noticia.js'
+import './models/m_sedeInternacional.js'
+import './models/m_sedeNacional.js'
+import './models/m_testimonio.js'
+import './models/m_usuario.js'
 
 
 
