@@ -1,11 +1,9 @@
 
-import { connectDB } from "../config/connect.js";
-import { ObjectId } from "mongodb";
+import m_usuario from "../models/m_usuario.js";
 
 export const getUsuarios = async () => {
     try {
-        const database = await connectDB();
-        const usuarios = await database.collection('usuarios').find().toArray();
+        const usuarios = await m_usuario.find();
         return usuarios;
 
     } catch (error) {
@@ -16,11 +14,7 @@ export const getUsuarios = async () => {
 
 export const getUsuarioById = async (id) => {
     try {
-        const database = await connectDB();
-        const usuario = await database.collection('usuarios').findOne(
-            {
-                _id : new ObjectId(id)
-            });
+        const usuario = await m_usuario.findById(id);
         return usuario;
 
     } catch (error) {
@@ -31,9 +25,8 @@ export const getUsuarioById = async (id) => {
 
 export const createUsuario = async (datosUsuario) => {
     try {
-        const database = await connectDB();
-        const usuario = await database.collection('usuarios').insertOne(datosUsuario);
-        return usuario.insertedId;
+        const usuario = await m_usuario.create(datosUsuario);
+        return usuario._id;
 
     } catch (error) {
         console.error(" [Servicio] Error al crear usuario en la DB: ", error);
@@ -43,12 +36,11 @@ export const createUsuario = async (datosUsuario) => {
 
 export const updateUsuario = async (id, datosUsuario) => {
     try {
-        const database = await connectDB();
-        const usuario = await database.collection('usuarios').updateOne(
-            { _id: new ObjectId(id) },
-            { $set: datosUsuario }
-        );
-        return usuario.modifiedCount;
+        const usuario = await m_usuario.findByIdAndUpdate(id, datosUsuario, { new: true });
+        if (!usuario) {
+            return 0
+        }
+        return 1;
 
     } catch (error) {
         console.error(" [Servicio] Error al editar usuario en la DB: ", error);
@@ -58,10 +50,7 @@ export const updateUsuario = async (id, datosUsuario) => {
 
 export const deleteUsuario = async (id) => {
     try {
-        const database = await connectDB();
-        const usuario = await database.collection('usuarios').deleteOne(
-            { _id: new ObjectId(id) }
-        );
+        const usuario = await m_usuario.deleteOne({ _id: id });
         return usuario.deletedCount;
 
     } catch (error) {
