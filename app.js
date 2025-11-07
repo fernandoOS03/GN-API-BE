@@ -3,7 +3,8 @@ import express from 'express';
 import { connectDB } from './config/connect.js';
 
 
-" ============ RUTAS ============"
+import Login from './routes/auth.js'
+
 import ministroRoutes from './routes/api/r_ministro.js';
 import eventoRoutes from './routes/api/r_evento.js';
 import horaPiadosaRoutes from "./routes/api/r_horaPiadosa.js";
@@ -12,6 +13,7 @@ import sedeInternacionalRoutes from "./routes/api/r_sedeInternacional.js";
 import sedeNacionalRoutes from "./routes/api/r_sedeNacional.js";
 import testimonioRoutes from "./routes/api/r_testimonio.js";
 import usuarioRoutes from "./routes/api/r_usuario.js";
+
 
 " ============ MODELOS ============"
 import './models/m_evento.js'
@@ -29,6 +31,10 @@ const app = express();
 const PORT = process.env.PORT
 
 app.use(express.json());
+
+" ============ RUTAS ============"
+
+app.use('/api/login', Login)
 
 app.use('/api/ministros', ministroRoutes);
 app.use('/api/horaPiadosa', horaPiadosaRoutes);
