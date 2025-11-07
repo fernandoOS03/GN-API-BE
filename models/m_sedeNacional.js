@@ -6,4 +6,4 @@ const sedeNacionalSchema = new mongoose.Schema({
     id_ministro:{ type:mongoose.Schema.Types.ObjectId, ref: 'ministros' }
 });
 
-export default mongoose.model('sedesNacional', sedeNacionalSchema, 'sedesnacionales');
+export default mongoose.model('sedesNacional', sedeNacionalSchema, 'sedesNacionales');

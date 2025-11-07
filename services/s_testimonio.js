@@ -1,10 +1,8 @@
-import { connectDB } from "../config/connect.js";
-import { ObjectId } from "mongodb";
+import m_testimonio from "../models/m_testimonio.js";
 
 export const getAllTestimonios = async () => {
     try {
-        const database = await connectDB();
-        const testimonios = await database.collection('testimonios').find().toArray();
+        const testimonios = await m_testimonio.find();
         return testimonios;
     } catch (error) {
         console.error(" [Servicio] Error al obtener los testimonios de la DB: ", error);
@@ -14,9 +12,8 @@ export const getAllTestimonios = async () => {
 
 export const createTestimonio = async (datosTestimonio) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('testimonios').insertOne(datosTestimonio);
-        return resultado.insertedId;
+        const resultado = await m_testimonio.create(datosTestimonio);
+        return resultado._id;
     } catch (error) {
         console.error(" [Servicio] Error al crear testimonio en la DB: ", error);
         throw error;
@@ -25,12 +22,11 @@ export const createTestimonio = async (datosTestimonio) => {
 
 export const updateTestimonio = async (id, datosTestimonio) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('testimonios').updateOne(
-            { _id: new ObjectId(id) }, 
-            { $set: datosTestimonio }  
-        );
-        return resultado.modifiedCount; 
+        const resultado = await m_testimonio.findByIdAndUpdate(id, datosTestimonio, { new: true });
+        if (!resultado) {
+            return 0
+        }
+        return 1;
     } catch (error) {
         console.error(" [Servicio] Error al editar testimonio en la DB: ", error);
         throw error;
@@ -39,12 +35,8 @@ export const updateTestimonio = async (id, datosTestimonio) => {
 
 export const deleteTestimonio = async (id) => {
     try {
-        const database = await connectDB();
-        const resultado = await database.collection('testimonios').deleteOne(
-            { _id: new ObjectId(id) }
-        );
+        const resultado = await m_testimonio.deleteOne({_id:id});
         return resultado.deletedCount;
-
     } catch (error) {
         console.error(" [Servicio] Error al eliminar testimonio en la DB: ", error);
         throw error;
@@ -53,11 +45,7 @@ export const deleteTestimonio = async (id) => {
 
 export const getTestimonioById = async (id) => {
     try {
-        const database = await connectDB();
-        const testimonio = await database.collection('testimonios').findOne(
-            {
-                _id: new ObjectId(id)
-            });
+        const testimonio = await m_testimonio.findById(id);
         return testimonio;
     } catch (error) {
         console.error(" [Servicio] Error al obtener usuario de la DB: ", error);
