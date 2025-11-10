@@ -45,7 +45,7 @@ export const updateSedeInternacional = async (req, res) => {
     }
     res.status(200).json({ success: true, message: "Sede Internacional actualizada correctamente." });
   } catch (error) {
-    console.error("Error al editar la sede internacional", error);
+    console.error("Error al editar la sede internacional : ", error);
     res.status(500).json({ success: false, message: "Error..." });
   }
 };

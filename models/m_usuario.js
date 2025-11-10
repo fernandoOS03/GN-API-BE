@@ -1,23 +1,43 @@
-import mongoose from "mongoose";
-import bcrypt from 'bcryptjs'
+// models/Usuario.js
+import { DataTypes } from "sequelize";
+import database from '../config/db.js';
 
-const usuarioSchema = new mongoose.Schema({
-    nombre: { type: String, required: true },
-    apellido: { type: String, required: true },
-    dni: { type: String, require: true, trim: true },
-    email: { type: String, require: true, unique: true, lowercase: true },
-    contrasenia: { type: String, required: true, select: false },
-    rol: { type: String, required: true, enum: ['super_admin', 'admin', 'editor'], default: "editor" }
+const Usuario = database.define('Usuario', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    nombres: {
+        type: DataTypes.STRING(20),
+        allowNull: false
+    },
+    apellidos: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
+    dni: {
+        type: DataTypes.STRING(8),
+        unique: true,
+        allowNull: true
+    },
+    email: {
+        type: DataTypes.STRING(30), 
+        unique: true,
+        allowNull: false
+    }, 
+    contrasenia: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }, 
+    rol: {
+        type: DataTypes.STRING(15),
+        defaultValue: 'user'
+    }, 
+}, {
+    tableName: 'usuarios',
+    timestamps: false
 });
 
-usuarioSchema.pre('save', async function (next) {
-    // 1. Condición Crucial: Solo hashear si la contraseña es nueva o ha sido modificada
-    if (!this.isModified('contrasenia')) {
-        return next();
-    }
-    const salt = await bcrypt.genSalt(10);
-    this.contrasenia = await bcrypt.hash(this.contrasenia, salt);
-    next();
-});
-
-export default mongoose.model("usuario", usuarioSchema, "usuarios");
+export default Usuario;

@@ -1,13 +1,11 @@
-import {Router} from "express";
-import { validateObjectId } from "../../middlewares/validateId.js";
-import {createTestimonio, deleteTestimonio, updateTestimonio, getAllTestimonios, getTestimonioById} from "../../controllers/c_testimonio.js";
+import { Router } from "express";
+import { createTestimonio, deleteTestimonio, updateTestimonio, getAllTestimonios, getTestimonioById } from "../../controllers/c_testimonio.js";
 
 const router = Router();
 
 router.post("/", createTestimonio);
 router.get("/", getAllTestimonios);
-router.get("/:id", validateObjectId, getTestimonioById);
-router.put("/:id", validateObjectId, updateTestimonio);
-router.delete("/:id", validateObjectId, deleteTestimonio);
-
+router.get("/:id", getTestimonioById);
+router.put("/:id", updateTestimonio);
+router.delete("/:id", deleteTestimonio);
 export default router;

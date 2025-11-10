@@ -1,4 +1,3 @@
-import { message } from 'statuses';
 import * as authService from '../services/s_auth.js'
 
 export const Login = async (req, res) => {

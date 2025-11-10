@@ -1,8 +1,8 @@
-import { Router } from "express"
+/*import { Router } from "express"
 import { Login } from "../../controllers/c_auth.js"
 
 const router = Router();
 
 router.post("/login", Login);
 
-export default router;
+export default router;*/
