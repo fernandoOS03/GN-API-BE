@@ -34,7 +34,7 @@ const Usuario = database.define(
       allowNull: false,
     },
     rol: {
-      type: DataTypes.ENUM("admin", "editor"),
+      type: DataTypes.ENUM("super_admin","admin", "editor"),
       allowNull: false,
       defaultValue: "editor",
     },

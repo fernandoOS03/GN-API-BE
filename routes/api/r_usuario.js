@@ -1,12 +1,15 @@
 import { Router } from "express";
+import { protect } from "../../middlewares/auth.js";
+import { checkRole } from "../../middlewares/role.js";
 import { createUsuario, deleteUsuario, updateUsuario, getAllUsuarios, getUsuarioById } from "../../controllers/c_usuario.js";
 
 const router = Router();
 
-router.post("/", createUsuario);
-router.get("/", getAllUsuarios);
-router.get("/:id", getUsuarioById);
-router.put("/:id", updateUsuario);
-router.delete("/:id", deleteUsuario);
+router.get("/", protect, checkRole(['super_admin','admin']), getAllUsuarios);
+router.get("/:id", protect, checkRole(['super_admin','admin']), getUsuarioById);
+router.put("/:id", protect, checkRole(['super_admin']), updateUsuario);
+router.delete("/:id", protect, checkRole(['super_admin']), deleteUsuario);
+router.post("/", protect, checkRole(['super_admin']), createUsuario);
 
 export default router;
+`x`
