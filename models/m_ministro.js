@@ -1,4 +1,3 @@
-// models/Ministro.js
 import { DataTypes } from "sequelize";
 import database from '../config/db.js';
 

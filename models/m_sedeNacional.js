@@ -1,4 +1,3 @@
-// models/SedeNacional.js
 import { DataTypes } from "sequelize";
 import database from '../config/db.js';
 
