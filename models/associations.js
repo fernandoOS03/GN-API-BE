@@ -27,45 +27,45 @@ Ministro.belongsTo(Cargo, {
     as: 'cargos'
 });
 
-Cargo.hasMany(Ministro,{
+Cargo.hasMany(Ministro, {
     foreignKey: 'cargosId',
-    as : 'ministros'
+    as: 'ministros'
 });
 
 
 //========= RELACION MINSTRO 1 - 1 SEDES NACIONALES ========= 
 
-Ministro.belongsTo(SedeNacional,{
+Ministro.belongsTo(SedeNacional, {
     foreignKey: 'sedeNacionalId',
     as: 'sedeNacional'
 });
 
-SedeNacional.hasOne(Ministro,{
-    foreignKey:'sedeNacionalId',
+SedeNacional.hasOne(Ministro, {
+    foreignKey: 'sedeNacionalId',
     as: 'ministro'
 });
 
 //========= RELACION MINSTRO 1 - M HORAS PIADOSAS ========= 
 
-Ministro.hasMany(HoraPiadosa,{
+Ministro.hasMany(HoraPiadosa, {
     foreignKey: 'ministroId',
-    as : 'horaPiadosa'
+    as: 'horaPiadosa'
 });
 
-HoraPiadosa.belongsTo(Ministro,{
+HoraPiadosa.belongsTo(Ministro, {
     foreignKey: 'ministroId',
-    as : 'ministros'
+    as: 'ministros'
 });
 
 
 //========= EVENTOS 1 - 1 EVENTOS ========= 
 
-Evento.belongsTo(TipoEvento,{
-    foreignKey : 'tipoEventosId',
-    as : 'tipoEvento'
+Evento.belongsTo(TipoEvento, {
+    foreignKey: 'tipoEventosId',
+    as: 'tipoEvento'
 });
 
-TipoEvento.hasMany(Evento,{
-    foreignKey : 'tipoEventosId',
-    as : 'eventos'
+TipoEvento.hasMany(Evento, {
+    foreignKey: 'tipoEventosId',
+    as: 'eventos'
 });
