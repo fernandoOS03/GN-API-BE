@@ -1,13 +1,12 @@
 import { Router } from "express";
-import { validateObjectId } from "../../middlewares/validateId.js";
 import { createEvento, updateEvento, deleteEvento, getAllEventos, getEventoById } from "../../controllers/c_evento.js";
 
- const router = Router();
+const router = Router();
 
 router.post("/", createEvento);
 router.get("/", getAllEventos);
-router.get("/:id", validateObjectId, getEventoById);
-router.put("/:id", validateObjectId, updateEvento);
-router.delete("/:id", validateObjectId, deleteEvento);
+router.get("/:id", getEventoById);
+router.put("/:id", updateEvento);
+router.delete("/:id", deleteEvento);
 
 export default router;

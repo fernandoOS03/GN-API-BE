@@ -1,14 +1,13 @@
-import {Router} from "express";
-import { validateObjectId } from "../../middlewares/validateId.js";
-import {createSedeNacional, deleteSedeNacional, updateSedeNacional, getAllSedesNacionales, getSedeNacionalById, getSedeConMinistro} from "../../controllers/c_sedeNacional.js";
+import { Router } from "express";
+import { createSedeNacional, deleteSedeNacional, updateSedeNacional, getAllSedesNacionales, getSedeNacionalById, getSedeConMinistro } from "../../controllers/c_sedeNacional.js";
 
 const router = Router();
 
 router.post("/", createSedeNacional);
 router.get("/", getAllSedesNacionales);
-router.get("/:id", validateObjectId, getSedeNacionalById);
-router.get("/:id/ministro", validateObjectId, getSedeConMinistro);
-router.put("/:id", validateObjectId, updateSedeNacional);
-router.delete("/:id", validateObjectId, deleteSedeNacional);
+router.get("/:id", getSedeNacionalById);
+router.get("/:id/ministro", getSedeConMinistro);
+router.put("/:id", updateSedeNacional);
+router.delete("/:id", deleteSedeNacional);
 
 export default router;

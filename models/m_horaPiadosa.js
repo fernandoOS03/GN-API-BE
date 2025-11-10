@@ -1,9 +1,29 @@
-import mongoose from "mongoose";
+// models/HoraPiadosa.js
+import { DataTypes } from "sequelize";
+import database from '../config/db.js';
 
-const horaPiadosaSchema = new mongoose.Schema({
-    fecha: { type: Date, require: true },
-    url_video: String,
-    id_ministro: { type: mongoose.Schema.Types.ObjectId, ref: 'ministros' }
+const HoraPiadosa = database.define('HoraPiadosa', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    fecha: {
+        type: DataTypes.DATE,
+        
+    },
+    urlVideo: {
+        type: DataTypes.STRING(80),
+        allowNull: false 
+    },
+    ministroId: { 
+        type: DataTypes.INTEGER,
+        allowNull: false 
+    }
+}, {
+    tableName: 'horasPiadosas', // Nombre de la tabla en MySQL (usamos plural)
+    timestamps: false 
 });
 
-export default mongoose.model('horasPiadosa', horaPiadosaSchema, 'horasPiadosas');
+export default HoraPiadosa;

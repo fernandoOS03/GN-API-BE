@@ -1,9 +1,25 @@
-import mongoose from "mongoose";
+// models/SedeNacional.js
+import { DataTypes } from "sequelize";
+import database from '../config/db.js';
 
-const sedeNacionalSchema = new mongoose.Schema({
-    nombre_sede: {type:String, require:true},
-    ubicacion_sede : String,
-    id_ministro:{ type:mongoose.Schema.Types.ObjectId, ref: 'ministros' }
+const SedeNacional = database.define('SedeNacional', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true, 
+        autoIncrement:true, 
+        allowNull: false
+    },
+    nameSedeNac: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    ubiSedeNac: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }, 
+}, {
+    tableName: 'sedesNacionales',
+    timestamps: false
 });
 
-export default mongoose.model('sedesNacional', sedeNacionalSchema, 'sedesNacionales');
+export default SedeNacional;
