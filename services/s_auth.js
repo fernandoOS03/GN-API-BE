@@ -1,7 +1,7 @@
 import m_usuario from "../models/m_usuario.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { use } from "react";
+
 
 export const loginUser = async (email, contrasenia) => {
   //Busca Usuario (Incluyendo la contrasenia que esta en 'select : false')
