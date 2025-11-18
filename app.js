@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import { connection } from './config/connection.js';
-
+import cors from "cors";
 
 import Login from './routes/api/r_auth.js';
 import './models/associations.js'
@@ -35,6 +35,7 @@ const app = express();
 const PORT = process.env.PORT
 
 app.use(express.json());
+app.use(cors());
 
 //" ============ RUTAS ============"
 

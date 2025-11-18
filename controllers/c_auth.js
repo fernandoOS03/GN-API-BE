@@ -9,7 +9,7 @@ export const Login = async (req, res) => {
     };
 
     try {
-        const { token, rol } = authService.loginUser(email, contrasenia);
+        const { token, rol } = await authService.loginUser(email, contrasenia);
 
         res.status(200).json({ success: true, message: 'Autenticación exitosa', token, rol });
 
@@ -22,3 +22,4 @@ export const Login = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error interno del servidor.' });
     }
 };
+
