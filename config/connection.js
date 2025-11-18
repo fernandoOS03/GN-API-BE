@@ -19,23 +19,23 @@ export const connection = async () => {
         //Se esta importando aqui porque hay un erro al momento de generar las tablas.
         //Por eso se esta poniendo de manera literal el orden en el que se crearan.
 
-        //TABLAS SIN FK DEPENDIENTES DE OTRAS TABLAS
-        await Cargo.sync({ alter: true });
-        await SedeNacional.sync({ alter: true });
-        await TipoEvento.sync({ alter: true });
+        // //TABLAS SIN FK DEPENDIENTES DE OTRAS TABLAS
+        // await Cargo.sync({ alter: true });
+        // await SedeNacional.sync({ alter: true });
+        // await TipoEvento.sync({ alter: true });
 
-        await Ministro.sync({ alter: true });
-        await Testimonio.sync({ alter: true });
-        await Evento.sync({ alter: true });
+        // await Ministro.sync({ alter: true });
+        // await Testimonio.sync({ alter: true });
+        // await Evento.sync({ alter: true });
 
 
-        //TABLAS HIJOS DE NIVEL 2 (DEPENDEN DE MINSITROS
-        await HoraPiadosa.sync({ alter: true });
+        // //TABLAS HIJOS DE NIVEL 2 (DEPENDEN DE MINSITROS
+        // await HoraPiadosa.sync({ alter: true });
 
-        //CREAMOS LAS TABLAS QUE TIENE RELACION
-        await SedeInternacional.sync({ alter: true });
-        await Noticia.sync({ alter: true });
-        await Usuario.sync({ alter: true });
+        // //CREAMOS LAS TABLAS QUE TIENE RELACION
+        // await SedeInternacional.sync({ alter: true });
+        // await Noticia.sync({ alter: true });
+        // await Usuario.sync({ alter: true });
 
     } catch (error) {
         console.error("Error en la conexion y sincronizacion : ", error);

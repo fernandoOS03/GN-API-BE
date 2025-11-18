@@ -17,14 +17,14 @@ export const protect = async (req, res, next) => {
 
       //3. Decodifica el token
       //Verifica la firma, la expiracion  y lo decodifica usando el secreto
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded =  jwt.verify(token, process.env.JWT_SECRET);
 
       //4. Adjuntar el Usuario a la peticion
       //EL 'decoded.usuario.id' viene del payload que se genero en el login
       //.select('-contrasenia') proviene del hash de la contrasenia que adjunte
       // a la peticion, aunque ya se tiene 'select : false' en el modelo, esto es doble seguridad
-      req.user = m_usuario.findByPk(decoded.usuario.id, {
-        attributes: { exclude: ["contrasenia"] },
+      req.user = await m_usuario.findByPk(decoded.usuario.id, {
+        attributes: { include: ["contrasenia"] },
       });
       //Verifica si el usuario fue encontrado(El token puede ser valido, pero el usuario ya fue eliminado)
       if (!req.user) {

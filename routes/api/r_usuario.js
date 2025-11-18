@@ -9,7 +9,8 @@ router.get("/", protect, checkRole(['super_admin','admin']), getAllUsuarios);
 router.get("/:id", protect, checkRole(['super_admin','admin']), getUsuarioById);
 router.put("/:id", protect, checkRole(['super_admin']), updateUsuario);
 router.delete("/:id", protect, checkRole(['super_admin']), deleteUsuario);
-router.post("/", protect, checkRole(['super_admin']), createUsuario);
+//router.post("/", checkRole(['super_admin']), createUsuario);
+router.post("/", createUsuario);
 
 export default router;
 `x`

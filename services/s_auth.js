@@ -7,6 +7,7 @@ export const loginUser = async (email, contrasenia) => {
   //Busca Usuario (Incluyendo la contrasenia que esta en 'select : false')
   const user = await m_usuario.findOne({
     where: { email },
+    attributes: { include: ['contrasenia'] }
   });
 
   if (!user) {
@@ -31,7 +32,7 @@ export const loginUser = async (email, contrasenia) => {
   const token = jwt.sign(
     payload,
     process.env.JWT_SECRET,
-    {expiresIn: '1h'}
+    { expiresIn: '1h' }
   )
 
   return { token, rol: user.rol };

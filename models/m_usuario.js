@@ -32,6 +32,7 @@ const Usuario = database.define(
     contrasenia: {
       type: DataTypes.STRING,
       allowNull: false,
+      select: false
     },
     rol: {
       type: DataTypes.ENUM("super_admin","admin", "editor"),
@@ -49,10 +50,10 @@ const Usuario = database.define(
         user.contrasenia = await bcrypt.hash(user.contrasenia, salt);
       },
       //Este se ejecuta antes de actualizar, siempre y cuando la contraseña de haya cambiado
-      beforeCreate: async (user) => {
+      beforeUpdate: async (user) => {
         if (user.changed("contrasenia")) {
           const salt = await bcrypt.genSalt(10);
-          user.contrasenia = bcrypt.hash(user.contrasenia, salt);
+          user.contrasenia = await bcrypt.hash(user.contrasenia, salt);
         }
       },
     },
