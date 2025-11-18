@@ -41,7 +41,7 @@ const Usuario = database.define(
   },
   {
     tableName: "usuarios",
-    timestamps: true,
+    timestamps: false,
     hooks: {
         //Se ejecuta antes de crear el usuario ( para hashear la contraseña inicial)
       beforeCreate: async (user) => {

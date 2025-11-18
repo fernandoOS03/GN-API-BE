@@ -3,7 +3,7 @@ import express from 'express';
 import { connection } from './config/connection.js';
 
 
-//import Login from './routes/auth.js';
+import Login from './routes/api/r_auth.js';
 import './models/associations.js'
 
 import cargoRoutes from "./routes/api/r_cargo.js";
@@ -38,7 +38,7 @@ app.use(express.json());
 
 //" ============ RUTAS ============"
 
-//app.use('/api/login', Login)
+app.use('/api/auth', Login)
 
 app.use('/api/cargo', cargoRoutes);
 app.use('/api/evento', eventoRoutes);
